@@ -17,8 +17,8 @@ You'll be pulling `trunk` of this repo into your local namespace, forking it to 
 
 ## Steps
 
-1. `.> pull https://github.com/unisonweb/base:.trunk _base` (you can do this both for initial fetch and for subsequent updates)
-2. `.> fork _base .prs.base._mything` to create a copy of `_base`. You can create multiple forks in `.prs.base`, if you have multiple things you're working on.
+1. `.> pull https://github.com/unisonweb/base:.trunk ._base` (you can do this both for initial fetch and for subsequent updates)
+2. `.> fork ._base .prs.base._mything` to create a copy of `_base`. You can create multiple forks in `.prs.base`, if you have multiple things you're working on.
 3. If you haven't already done so, set your default author, and for at least `.prs.base` set the default license to MIT, which is the preferred license for new definitions in this repo (if you're already using the MIT license as your default license everywhere, then no action needed). See [these instructions on how to configure just a sub-namespace with a different license](https://www.unisonweb.org/docs/configuration/#setting-default-metadata-like-license-and-author) and there's a sample excerpt config below.
 4. Now `cd .prs.base._mything` and hack away. You can at any time review what's changed between your namespace and `_base` with `diff.namespace ._base .prs.base._mything`.
 5. Push your forked version somewhere public. Suggestion: just mirror your root Unison namespace to a git repo `.> push git@github.com:mygithubname/allmyunisoncode`. No need to maintain a separate Git repo for every Unison library you want to contribute to.
