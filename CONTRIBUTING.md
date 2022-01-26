@@ -1,4 +1,96 @@
-Hi. 😀 We welcome you to contribute to the Unison base libraries. This library follows the conventions in [this document](https://www.unisonweb.org/docs/codebase-organization/) and we recommend reading that document, in particular [this section on creating and managing pull requests](https://www.unisonweb.org/docs/codebase-organization/#day-to-day-development-creating-and-merging-pull-requests). 
+# Contributing to the Unison Base libraries
+
+Hi. 😀 We welcome you to contribute to the Unison base libraries.
+
+Please read our [Code of Conduct](https://www.unisonweb.org/code-of-conduct) to ensure our community remains as friendly as possible.
+
+## About this document
+
+This is a guide for submitting pull requests to this project. It details:
+
+* The layout of the code.
+* The logistics of creating a pull request to the Base libraries.
+* Criteria for what should be included in these libraries and what should not.
+* Standards of quality that pull requests must meet.
+
+These are just guidelines, not rules. Contributors need to exercise some judgment in applying these guidelines to individual pull requests, but this document should help everyone know what to expect.
+
+## What should be in Base?
+
+There is no one rule for what should be included in the Base libraries, but contributors should heed the following guidelines.
+
+### No external dependencies
+
+Base should not have any dependencies on other libraries, so functionality should include any and all code it requires.
+
+### Dependencies of Unison tooling
+
+Base needs to include any functionality required to support the Unison compiler, Codebase Manager, and other basic tooling. An example of this kind of thing is the [`base.Doc`](https://share.unison-lang.org/latest/namespaces/unison/base/;/types/Doc) type.
+
+### Batteries included
+
+The purpose of the Base libraries is to help developers to be productive from the beginning, without having to hunt for a bunch of libraries to do basic stuff. Anything that's likely to be useful to most developers should be considered for inclusion in Base.
+
+Conversely, things should not be in Base unless they're likely to see use by a lot of developers for different applications. Specialized functionality, or code that's unlikely to see much use, should generally not be in Base.
+
+Examples of universally useful things are the [`compose`](https://share.unison-lang.org/latest/namespaces/unison/base/;/terms/compose) function and the [`List`](https://share.unison-lang.org/latest/namespaces/unison/base/;/types/List) data type.
+
+### Standard implementations
+
+For certain functions and types that lots of developers need, it can be counterproductive to have many competing implementations or representations. Sometimes there's even an obvious "best" implementation. For these, it's best to standardize on one and include it in Base. An example of this is [`base.List`](https://share.unison-lang.org/latest/namespaces/unison/base/;/types/List).
+
+Conversely, sometimes developers can benefit from having more than one implementation of a function or type to choose from for different applications. Such things should be excluded from Base unless they're very simple. An example of the kind of thing that should be excluded is an [HTTP client](https://share.unison-lang.org/latest/namespaces/stew/http/;/terms/README).
+
+### No novelty
+
+Code in Base should generally be of the kind that sits in well-explored design spaces. If something is highly novel, cutting-edge research, or a current fad, it should probably not be in Base.
+
+### Stability
+
+It's important that Base stay relatively stable. Code that's likely to change frequently, or see design churn or rapid development cycles, should generally not be in Base.
+
+### No controversy
+
+Code in Base should be uncontroversial to the extent possible. Sometimes  developers have strong personal preferences with regard to some functionality, or any given design is unlikely to be the best one for most people. Such things should probably not be in Base.
+ 
+ 
+## Quality considerations
+
+Unison code in Base should meet some minimal quality standards.
+
+### Efficiency
+
+Code in Base should be reasonably efficient. At the very least, there should not be operations that take quadratic or exponential time where a linear or logarithmic time implementation is possible.
+
+### License and author
+
+Every term and type in Base should be [linked to at least one `Author` object](https://www.unisonweb.org/docs/configuration#setting-default-metadata-like-license-and-author) representing the person or organization who wrote the code. Every term and type in Base should also link to a permissive `License` that's compatible with the [MIT license](https://opensource.org/licenses/MIT).
+
+If you don't want to retain copyright to your contribution, you can simply link to the [Unison license](https://share.unison-lang.org/latest/namespaces/unison/base/;/terms/metadata/licenses/unisoncomputing2021) as long as you state somewhere that you're assigning copyright for this code to Unison Computing. If that's what you're doing, simply comment on your pull request with something like the following:
+
+> I'm the original author of this code and I'm assigning the copyright for it to Unison Computing.
+
+If someone other than you is the original author, you should link to the code an `Author` object representing them, and also link the license under which you are republishing their code.
+
+### Test coverage
+
+Code in Base should have tests. [See here for a guide on how to write tests in Unison](https://www.unisonweb.org/docs/testing/). You should strive to have good test coverage before submitting your code as a pull request.
+
+### Documentation
+
+Everything added to Base needs to have good documentation in at least English. [See here for a guide to writing library documentation in Unison](https://www.unisonweb.org/docs/documentation/).
+
+Docs should have proper spelling, grammar, and punctuation. They should be properly formatted so they look nice when rendered.
+
+Docs should start with a brief one-paragraph overview, then optionally include a longer description. There should be code examples which illustrate common cases and edge cases. Finally, there should be links to related definitions and further reading.
+
+See [the documentation of the `List` type](https://share.unison-lang.org/latest/types/unison/base/List) for an example of good documentation for a data type.
+
+See [the documentation of `Natural.toDecimalText`](https://share.unison-lang.org/latest/namespaces/unison/base/;/terms/Natural/toDecimalText/doc) for an example of good function documentation.
+
+## How to make a pull request to Base
+
+This library follows the conventions in [this document](https://www.unisonweb.org/docs/codebase-organization/) and we recommend reading that document, in particular [this section on creating and managing pull requests](https://www.unisonweb.org/docs/codebase-organization/#day-to-day-development-creating-and-merging-pull-requests). 
 
 The `base` library has no external dependencies, so its namespace looks like:
 
@@ -13,9 +105,9 @@ releases/
   ...
 ```
 
-You'll be pulling `trunk` of this repo into your local namespace, forking it to make some changes, pushing the updated version of trunk to some public Unison repo, then using the `pull-request.create` command to create the PR.
+You should pull `trunk` of this repo into your local namespace, forking it to make some changes, pushing the updated version of trunk to some public Unison repo, then using the `pull-request.create` command to create the PR.
 
-## Steps
+### Steps
 
 1. `.> pull https://github.com/unisonweb/base:.trunk ._base` (you can do this both for initial fetch and for subsequent updates)
 2. `.> fork ._base .prs.base._mything` to create a copy of `_base`. You can create multiple forks in `.prs.base`, if you have multiple things you're working on.
