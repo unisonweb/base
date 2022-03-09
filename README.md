@@ -7,7 +7,7 @@ This includes basic data types and functions for the [Unison](http://unisonweb.o
 From the Unison Codebase Manager (`ucm`) prompt:
 
 ```
-.> pull https://github.com/unisonweb/base:.releases._latest .base
+.> pull https://github.com/unisonweb/base:v3:.releases._latest .base
 ```
 
 This will install the libraries into your codebase, under a namespace called `.base`.
