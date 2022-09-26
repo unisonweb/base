@@ -130,7 +130,7 @@ releases/
 .myTopic> push myUserName.public.base.main
 ```
 
-** 6. Use the `pull-request.create` command to create the PR:**
+**6. Use the `pull-request.create` command to create the PR:**
 
 ```
 .myTopic> pr.create unison.public.base.main myUserName.public.base.main
