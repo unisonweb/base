@@ -4,4 +4,4 @@ This includes basic data types and functions for the [Unison](http://unisonweb.o
 
 ## Deprecation Note
 
-This repository contains historical versions of base. Unison code hosting for this library has migrated to [Unison Share](https://share.unison-lang.org/@unison/p/code/latest/namespaces/public/base/latest).  
+This repository contains historical versions of base. Unison code hosting for this library has migrated to [Unison Share](https://share.unison-lang.org/@unison/base).  
