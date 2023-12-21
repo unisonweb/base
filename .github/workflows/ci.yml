@@ -1,0 +1,24 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '47 * * * *'
+
+jobs:
+  tests-transcript:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        base-version:
+          - 'releases/latest'
+          - 'main'
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Run tests transcript
+        env:
+          UNISON_BASE_VERSION: ${{ matrix.base-version }}
+          UNISON_DEBUG: timing
+        run: |
+          apt-get update && apt-get -y install gettext-base
+          cd tests
+          ./run-tests.sh
