@@ -2,7 +2,7 @@
 
 set -euxo pipefail
 
-UCM_RELEASE="${UCM_RELEASE:-latest}"
+UCM_RELEASE="${UCM_RELEASE:-release%2F0.5.12}"
 
 TRANSCRIPT=pull-and-run-tests.md
 
