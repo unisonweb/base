@@ -1,6 +1,6 @@
-# Contributing to the Unison Base libraries
+# Contributing to the Unison Base libraries (DEPRECATED) 
 
-Hi. 😀 We welcome you to contribute to the Unison base libraries.
+Hi. 😀 We welcome you to contribute to the Unison base libraries. This doc is considered deprecated, instead [head to Unison Share](https://share.unison-lang.org/@unison/base) and check out the "Tickets" tab to see if there are any open issues that you'd like to tackle. Then follow our guide for Creating a Pr: https://www.unison-lang.org/docs/tooling/project-workflows/#creating-a-pr to submit a contribution! 
 
 Please read our [Code of Conduct](https://www.unisonweb.org/code-of-conduct) to ensure our community remains as friendly as possible.
 
