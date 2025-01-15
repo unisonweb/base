@@ -5,7 +5,7 @@ on:
 
 jobs:
   tests-transcript:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       max-parallel: 4
@@ -20,12 +20,33 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
+      - name: Restore cached ucm release
+        id: restore-cached-ucm
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            /opt/unisonlanguage
+            /usr/local/bin/ucm
+          key: ${{ runner.os }}-ucm-${{ matrix.ucm-release-version }}
+      - name: Install ucm
+        if: steps.restore-cached-ucm.outputs.cache-hit != 'true'
+        env:
+          UCM_RELEASE: ${{ matrix.ucm-release-version }}
+        run: ./install-ucm.sh
       - name: Run tests transcript
         env:
           UNISON_BASE_VERSION: ${{ matrix.base-version }}
-          UCM_RELEASE: ${{ matrix.ucm-release-version }}
           UNISON_DEBUG: timing
         run: |
           apt-get update && apt-get -y install gettext-base
           cd tests
           ./run-tests.sh
+      - name: Cache ucm release
+        if: ${{ !cancelled() && steps.restore-cached-ucm.outputs.cache-hit != 'true' && startsWith(matrix.ucm-release-version, 'release') }}
+        id: save-ucm-to-cache
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            /opt/unisonlanguage
+            /usr/local/bin/ucm
+          key: ${{ steps.restore-cached-ucm.outputs.cache-primary-key }}
