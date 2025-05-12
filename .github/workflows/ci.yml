@@ -18,7 +18,7 @@ jobs:
           - 'releases/latest'
           - 'main'
         ucm-release-version:
-          - 'release/0.5.38'
+          - 'release/0.5.40'
           - 'latest'
           - 'trunk-build'
     steps:
