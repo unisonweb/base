@@ -15,9 +15,8 @@ jobs:
       max-parallel: 4
       matrix:
         base-version:
-          - 'releases/5.0.0'
-          # - 'releases/latest'
-          # - 'main'
+          - 'releases/latest'
+          - 'main'
         ucm-release-version:
           - 'latest'
           - 'trunk-build'
